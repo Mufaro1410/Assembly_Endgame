@@ -4,9 +4,17 @@ import './App.css'
 import Header from './components/Header'
 import LanguagesList from './components/LanguagesList'
 import Word from './components/Word'
+import Alphabet from './components/Alphabet'
 
 function AssemblyEndgame() {
   const [status, setStatus] = useState(true)
+  const [currentWord, setCurrentWord] = useState("react")
+  const [guessedLetters, setGuessedLetters] = useState([])
+  
+
+  const addGuessedLetter = (letter) => {
+    setGuessedLetters(prev => prev.includes(letter) ? prev :  [...prev, letter])
+  }
 
   return (
     <main>
@@ -18,7 +26,11 @@ function AssemblyEndgame() {
         </section>
       }
       <LanguagesList/>
-      <Word/>
+      <Word currentWord={currentWord}/>
+      <Alphabet onClick={addGuessedLetter}/>
+      <section className='button'>
+        <button>New Game</button>
+      </section>
     </main>
   )
 }
